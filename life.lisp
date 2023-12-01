@@ -32,9 +32,15 @@
                             ; Loop through all neighbors (including the current cell) and add any alive cells to neighbors
                             (loop for x-offset from -1 to 1
                                 do (loop for y-offset from -1 to 1
-                                    do (when (and (< (+ x x-offset) cols) (<= 0 (+ x x-offset)) (< (+ y y-offset) rows) (<= 0 (+ y y-offset)))
-                                        (if (aref grid (+ y y-offset) (+ x x-offset))
-                                            (incf neighbors)))))     
+                                    do (when (and 
+                                                ; Is in bounds
+                                                (< (+ x x-offset) cols)
+                                                (<= 0 (+ x x-offset))
+                                                (< (+ y y-offset) rows)
+                                                (<= 0 (+ y y-offset))
+                                                ; And cell is active
+                                                (aref grid (+ y y-offset) (+ x x-offset)))
+                                            (incf neighbors))))     
                             (let ((cell (aref grid y x)))
                                 (when cell (decf neighbors)) ; If current cell alive, decrement neighbors
                                 (cond 
