@@ -48,8 +48,7 @@
         (dotimes (x cols)
             (dotimes (y rows)
                 (let ((pen (if (aref grid y x) (symbol-value 'pen-alive) (symbol-value 'pen-dead))))
-                    (with-pen pen (rect (* x cell-size) (* y cell-size) cell-size cell-size)))))
-)
+                    (with-pen pen (rect (* x cell-size) (* y cell-size) cell-size cell-size))))))
 
 ; On mouse button down: toggles the clicked cell
 (defmethod kit.sdl2:mousebutton-event ((window life) state timestamp button x y)
@@ -63,8 +62,7 @@
         (setf active (not active))))
 
 (defun main () 
-    (make-instance 'life)
-)
+    (make-instance 'life))
 
 ; Loops indefinitely to not instantly close when run as an executable
 (defun main-executable ()
